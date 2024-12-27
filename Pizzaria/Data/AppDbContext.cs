@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Pizzaria.Models;
 
 namespace Pizzaria.Data
 {
@@ -9,5 +10,6 @@ namespace Pizzaria.Data
         {       
         }
 
+        public DbSet<Pizza> Pizzas { get; set; }
     }
 }
