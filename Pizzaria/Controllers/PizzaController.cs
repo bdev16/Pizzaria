@@ -8,5 +8,10 @@ namespace Pizzaria.Controllers
         {
             return View();
         }
+
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
     }
 }
