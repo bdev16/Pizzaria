@@ -137,5 +137,22 @@ namespace Pizzaria.Services.Pizza
             }
             
         }
+
+        public async Task<PizzaModel> RemoverPizza(int id)
+        {
+            try
+            {
+                var pizza = await _context.Pizzas.FirstOrDefaultAsync(pizzabanco => pizzabanco.Id == id);
+
+                _context.Remove(pizza);
+                await _context.SaveChangesAsync();
+
+                return pizza;
+
+            }catch (Exception ex) 
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
