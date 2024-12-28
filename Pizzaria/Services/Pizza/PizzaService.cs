@@ -67,15 +67,30 @@ namespace Pizzaria.Services.Pizza
 
         public async Task<List<PizzaModel>> GetPizzas()
         {
-            
             try
             {
+
                 return await _context.Pizzas.ToListAsync();
-            }catch (Exception ex) 
+
+            }
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }
 
+        public async Task<PizzaModel> GetPizzaPorId(int id)
+        {
+            try
+            {
+
+                return await _context.Pizzas.FirstOrDefaultAsync(pizza => pizza.Id == id);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
