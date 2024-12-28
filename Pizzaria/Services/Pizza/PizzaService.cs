@@ -5,11 +5,13 @@ using System.Runtime.CompilerServices;
 
 namespace Pizzaria.Services.Pizza
 {
-    public class PizzaService
+    public class PizzaService : IPizzaInterface
     {
+        private readonly AppDbContext _context;
         private readonly string _sistema;
-        public PizzaService(IWebHostEnvironment sistema)
+        public PizzaService(AppDbContext context, IWebHostEnvironment sistema)
         {
+            _context = context;
             _sistema = sistema.WebRootPath;
         }
 
@@ -34,6 +36,32 @@ namespace Pizzaria.Services.Pizza
             return nomeCaminhoImagem;
 
 
+        }
+
+        public async Task<PizzaModel> CriarPizza(PizzaCriacaoDto pizzaCriacaoDto, IFormFile imagem)
+        {
+            try
+            {
+                var nomeCaminhoImagem = GeraCaminhoArquivo(imagem);
+
+                var pizza = new PizzaModel
+                {
+                    Sabor = pizzaCriacaoDto.Sabor,
+                    Descricao = pizzaCriacaoDto.Descricao,
+                    Valor = pizzaCriacaoDto.Valor,
+                    Capa = nomeCaminhoImagem
+                };
+
+                _context.Add(pizza);
+                await _context.SaveChangesAsync();
+
+                return pizza;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
