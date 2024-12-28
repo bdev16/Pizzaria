@@ -7,5 +7,6 @@ namespace Pizzaria.Services.Pizza
     {
         Task<PizzaModel> CriarPizza(PizzaCriacaoDto pizzaCriacaoDto, IFormFile foto);
         Task<List<PizzaModel>> GetPizzas();
+        Task<PizzaModel> GetPizzaPorId(int id);
     }
 }
