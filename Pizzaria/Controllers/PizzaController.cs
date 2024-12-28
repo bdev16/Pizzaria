@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pizzaria.Dto;
+using Pizzaria.Models;
 using Pizzaria.Services.Pizza;
 
 namespace Pizzaria.Controllers
@@ -43,6 +44,21 @@ namespace Pizzaria.Controllers
             {
                 return View(pizzaCriacaoDto);
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(PizzaModel pizzaModel, IFormFile? foto)
+        {
+            if (ModelState.IsValid)
+            {
+                var pizza = await _pizzaInterface.EditarPizza(pizzaModel, foto);
+                return RedirectToAction("Index", "Pizza");
+            }
+            else
+            {
+                return View(pizzaModel);
+            }
+
         }
     }
 }
