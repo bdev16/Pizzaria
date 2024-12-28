@@ -10,6 +10,6 @@ namespace Pizzaria.Data
         {       
         }
 
-        public DbSet<Pizza> Pizzas { get; set; }
+        public DbSet<PizzaModel> Pizzas { get; set; }
     }
 }
