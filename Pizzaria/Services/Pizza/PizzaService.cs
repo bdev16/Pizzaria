@@ -1,4 +1,5 @@
-﻿using Pizzaria.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Pizzaria.Data;
 using Pizzaria.Dto;
 using Pizzaria.Models;
 using System.Runtime.CompilerServices;
@@ -62,6 +63,19 @@ namespace Pizzaria.Services.Pizza
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public async Task<List<PizzaModel>> GetPizzas()
+        {
+            
+            try
+            {
+                return await _context.Pizzas.ToListAsync();
+            }catch (Exception ex) 
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
     }
 }
