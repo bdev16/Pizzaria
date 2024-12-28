@@ -24,6 +24,13 @@ namespace Pizzaria.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Editar(int id)
+        {
+            var pizza = await _pizzaInterface.GetPizzaPorId(id);
+
+            return View(pizza);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Cadastrar(PizzaCriacaoDto pizzaCriacaoDto, IFormFile imagem)
         {
